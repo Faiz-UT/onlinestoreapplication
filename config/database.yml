@@ -14,16 +14,36 @@
 # Configure Using Gemfile
 # gem 'pg'
 #
-default: &default
-  adapter: postgresql
-  encoding: unicode
-  # For details on connection pooling, see rails configuration guide
-  # http://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+# default: &default
+#   adapter: postgresql
+#   encoding: unicode
+#   # For details on connection pooling, see rails configuration guide
+#   # http://guides.rubyonrails.org/configuring.html#database-pooling
+#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
-  <<: *default
-  database: storeApp_development
+  adapter: postgresql
+  encoding: unicode
+  database: OnlineStore_development
+  pool: 5
+  username: postgres
+  password: 123
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: OnlineStore_test
+  pool: 5
+  username: postgres
+  password: 123
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: OnlineStore_development
+  pool: 5
+  username: postgres
+  password: 123
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -55,9 +75,9 @@ development:
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
-test:
-  <<: *default
-  database: storeApp_test
+# test:
+#   <<: *default
+#   database: storeApp_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -78,8 +98,26 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-production:
-  <<: *default
-  database: storeApp_production
-  username: storeApp
-  password: storeApp925
+# production:
+#   <<: *default
+#   database: storeApp_production
+#   username: storeApp
+#   password: storeApp925
+
+# # sqlite3
+
+#   development:
+#   adapter: sqlite3
+#   database: db/development.sqlite3
+#   pool: 5
+#   timeout: 5000
+# test:
+#   adapter: sqlite3
+#   database: db/test.sqlite3
+#   pool: 5
+#   timeout: 5000
+# production:
+#   adapter: sqlite3
+#   database: db/production.sqlite3
+#   pool: 5
+#   timeout: 5000
