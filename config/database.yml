@@ -21,29 +21,29 @@
 #   # http://guides.rubyonrails.org/configuring.html#database-pooling
 #   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
-development:
-  adapter: postgresql
-  encoding: unicode
-  database: OnlineStore_development
-  pool: 5
-  username: postgres
-  password: 123
+# development:
+#   adapter: postgresql
+#   encoding: unicode
+#   database: OnlineStore_development
+#   pool: 5
+#   username: postgres
+#   password: 123
 
-test:
-  adapter: postgresql
-  encoding: unicode
-  database: OnlineStore_test
-  pool: 5
-  username: postgres
-  password: 123
+# test:
+#   adapter: postgresql
+#   encoding: unicode
+#   database: OnlineStore_test
+#   pool: 5
+#   username: postgres
+#   password: 123
 
-production:
-  adapter: postgresql
-  encoding: unicode
-  database: OnlineStore_development
-  pool: 5
-  username: postgres
-  password: 123
+# production:
+#   adapter: postgresql
+#   encoding: unicode
+#   database: OnlineStore_development
+#   pool: 5
+#   username: postgres
+#   password: 123
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -106,7 +106,7 @@ production:
 
 # # sqlite3
 
-#   development:
+# development:
 #   adapter: sqlite3
 #   database: db/development.sqlite3
 #   pool: 5
@@ -121,3 +121,29 @@ production:
 #   database: db/production.sqlite3
 #   pool: 5
 #   timeout: 5000
+
+default: &default
+  adapter: postgresql
+  host: <%= ENV["POSTGRES_HOST"] %>
+  encoding: unicode
+  min_messages: warning
+  pool : 2
+  timeout: 5000
+  port: 5432
+
+development:
+  <<: *default
+  database: onlinestore_development
+  username: <%= ENV["POSTGRES_USER"] %>
+  password: <%= ENV["POSTGRES_PASSWORD"] %>
+
+test:
+  <<: *default
+  database: onlinestore_test
+
+production:
+  <<: *default
+  database: onlinestore_production
+
+   
+
