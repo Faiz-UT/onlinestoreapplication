@@ -22,15 +22,15 @@ jobs:
     - name: Log in to registry
       uses: docker/login-action@v1
       with:
-        registry: https://index.docker.io/v1/
-        username: ${{ secrets.AzureAppService_ContainerUsername_1ac12b56726b482a998cd7c6e84dda0c }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_848ea4e3812e4ad2b1801d9c1a517ded }}
+        registry: https://mcr.microsoft.com/
+        username: ${{ secrets.AzureAppService_ContainerUsername_8fe1f66d459449d1937a8bc83ce3e5b6 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_d9df89f8e78b4de583f16c08ece42fe3 }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_1ac12b56726b482a998cd7c6e84dda0c }}/postgres:${{ github.sha }}
+        tags: mcr.microsoft.com/${{ secrets.AzureAppService_ContainerUsername_8fe1f66d459449d1937a8bc83ce3e5b6 }}/postgres:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'OnlineStoreApp'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_0dc0a551dcf84e4b9b798b2bf7ed6ad7 }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_1ac12b56726b482a998cd7c6e84dda0c }}/postgres:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_0f8103793fee4fafb822eab035a1b20b }}
+        images: 'mcr.microsoft.com/${{ secrets.AzureAppService_ContainerUsername_8fe1f66d459449d1937a8bc83ce3e5b6 }}/postgres:${{ github.sha }}'
